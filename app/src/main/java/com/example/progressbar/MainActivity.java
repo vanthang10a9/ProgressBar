@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_horizontal);
-        new runProgressBar().run();
+        new runProgressBar().start();
     }
 
     public class runProgressBar extends Thread {
