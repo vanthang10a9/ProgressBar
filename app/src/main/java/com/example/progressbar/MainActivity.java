@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar mProgressBar;
     private TextView mTextViewTienDo;
+    private Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,27 +24,51 @@ public class MainActivity extends AppCompatActivity {
 
         mTextViewTienDo = (TextView) findViewById(R.id.textviewTienDo);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_horizontal);
-        new runProgressBar().start();
+//        thread = new Thread() {
+//            int i;
+//            @Override
+//            public void run() {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            for (i = 0; i <= 100; i++) {
+//                                mProgressBar.setProgress(i);
+//                                mTextViewTienDo.setText(String.valueOf(i) + "%");
+//                            }
+//                        }
+//                    });
+//                try {
+//                    sleep(1000);
+//                } catch (InterruptedException e1) {
+//                    e1.printStackTrace();
+//                }
+//                thread.start();
+//            }
+//        };
+//    }
+//}
+        runProgressBar runProgressBar=new runProgressBar();
+        runProgressBar.start();
     }
 
     public class runProgressBar extends Thread {
+        int i;
         @Override
         public void run() {
-           runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < 100; i+=1) {
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+            for (i= 0; i < 100; i += 1) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         mProgressBar.setProgress(i);
                         mTextViewTienDo.setText(String.valueOf(i) + "%");
                     }
-                }
-            });
+                });
+            }
         }
     }
 }
-
