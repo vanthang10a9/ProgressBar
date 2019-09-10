@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar mProgressBar;
     private TextView mTextViewTienDo;
-    private Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
